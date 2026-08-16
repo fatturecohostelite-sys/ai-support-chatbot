@@ -1,0 +1,17 @@
+{
+  "name": "ai-support-widget",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Embeddable AI customer support chat widget powered by a custom knowledge base (RAG-lite) — demo built on a fictional plumbing business site.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "14.2.35",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}

@@ -1,0 +1,207 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #fbfcfd;
+}
+
+a {
+  transition: opacity 0.15s ease;
+}
+
+/* ---------- Homepage ---------- */
+
+.btn-primary {
+  background: #fff;
+  color: #0b6e99;
+  padding: 13px 24px;
+  border-radius: 10px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+.btn-secondary {
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  color: #fff;
+  padding: 13px 24px;
+  border-radius: 10px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+.service-card {
+  background: #fff;
+  border: 1px solid #e6edf1;
+  border-radius: 16px;
+  padding: 22px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(11, 110, 153, 0.12);
+  border-color: #cfe4ee;
+}
+
+.stat-card {
+  text-align: center;
+}
+
+.faq-item {
+  background: #fff;
+  border: 1px solid #e6edf1;
+  border-radius: 12px;
+  padding: 4px 18px;
+  transition: border-color 0.15s ease;
+}
+.faq-item[open] {
+  border-color: #0b6e99;
+}
+.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+}
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.testimonial-card {
+  background: #fff;
+  border: 1px solid #e6edf1;
+  border-radius: 16px;
+  padding: 22px;
+}
+
+.nav-link {
+  position: relative;
+  color: #eaf4f9;
+  text-decoration: none;
+  font-size: 14px;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: #fff;
+  transition: width 0.2s ease;
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ---------- Chat Widget ---------- */
+
+@keyframes aiw-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes aiw-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes aiw-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(11, 110, 153, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(11, 110, 153, 0);
+  }
+}
+
+@keyframes aiw-bounce {
+  0%,
+  80%,
+  100% {
+    transform: scale(0.6);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.aiw-fab {
+  animation: aiw-pulse 2.6s infinite;
+  transition: transform 0.15s ease;
+}
+.aiw-fab:hover {
+  transform: scale(1.06);
+}
+.aiw-fab:active {
+  transform: scale(0.96);
+}
+
+.aiw-panel-enter {
+  animation: aiw-pop-in 0.22s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.aiw-bubble-enter {
+  animation: aiw-fade-in 0.18s ease both;
+}
+
+.aiw-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #90a4ad;
+  display: inline-block;
+  animation: aiw-bounce 1.2s infinite ease-in-out;
+}
+.aiw-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.aiw-dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.aiw-suggestion-chip {
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+.aiw-suggestion-chip:hover {
+  background: #eaf6fb;
+  transform: translateY(-1px);
+}
+
+.aiw-send-btn {
+  transition: transform 0.1s ease, opacity 0.15s ease;
+}
+.aiw-send-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+.aiw-send-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}

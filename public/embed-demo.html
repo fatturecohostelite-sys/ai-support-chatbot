@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Portability Demo — Plain HTML Page with Embedded AI Widget</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        max-width: 680px;
+        margin: 60px auto;
+        padding: 0 20px;
+        color: #1a2733;
+        line-height: 1.6;
+      }
+      .banner {
+        background: #fff3cd;
+        color: #7a5b00;
+        padding: 10px 14px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 30px;
+      }
+      code {
+        background: #f2f5f7;
+        padding: 2px 6px;
+        border-radius: 4px;
+      }
+      pre {
+        background: #0a1f2b;
+        color: #cfe0e8;
+        padding: 16px;
+        border-radius: 10px;
+        overflow-x: auto;
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="banner">
+      This is a plain HTML page (no React, no build step) with the AI support
+      widget embedded via a single &lt;script&gt; tag — showing the widget works
+      on any existing website, not just this Next.js one.
+    </div>
+
+    <h1>Some Unrelated Static Website</h1>
+    <p>
+      This page shows the widget running outside the main site. It's plain
+      HTML, and the chat bubble in the bottom-right corner is powered by the
+      exact same <code>/api/chat</code> backend and knowledge base as the main
+      site.
+    </p>
+
+    <h2>How it's embedded</h2>
+    <pre><code>&lt;script
+  src="/widget.js"
+  data-api="/api/chat"
+  data-brand="AquaFix Plumbing"
+&gt;&lt;/script&gt;</code></pre>
+
+    <p>
+      In a real client delivery, <code>data-api</code> would point at their
+      deployed backend URL and <code>data-brand</code> would match their
+      business name — the client pastes one script tag into their existing
+      site (WordPress, Shopify, Webflow, static HTML, anything) and gets a
+      working AI support widget.
+    </p>
+
+    <script src="/widget.js" data-api="/api/chat" data-brand="AquaFix Plumbing"></script>
+  </body>
+</html>
