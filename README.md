@@ -10,8 +10,8 @@ The point of building it this way — a real site plus a portable widget plus a 
 
 ## Live Demo
 
-- Site: `<add your Vercel URL here>`
-- Plain-HTML embed example: `<your-url>/embed-demo.html`
+- Site: [ai-support-chatbot-plum.vercel.app](https://ai-support-chatbot-plum.vercel.app/)
+- Plain-HTML embed example: [ai-support-chatbot-plum.vercel.app/embed-demo.html](https://ai-support-chatbot-plum.vercel.app/embed-demo.html)
 
 ## Screenshots
 
@@ -77,8 +77,8 @@ The API route checks `GROQ_API_KEY` first, then `ANTHROPIC_API_KEY`, then `OPENA
 
 ```html
 <script
-  src="https://<your-deploy>.vercel.app/widget.js"
-  data-api="https://<your-deploy>.vercel.app/api/chat"
+  src="https://ai-support-chatbot-plum.vercel.app/widget.js"
+  data-api="https://ai-support-chatbot-plum.vercel.app/api/chat"
   data-brand="Your Business Name"
 ></script>
 ```
