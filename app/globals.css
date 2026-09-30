@@ -35,14 +35,14 @@ button {
 
 .mandy-page {
   min-height: 100vh;
-  padding: 38px 20px 54px;
+  padding: 34px 22px 46px;
   background:
     radial-gradient(circle at 50% -20%, rgba(111, 75, 216, 0.08), transparent 36%),
     #ffffff;
 }
 
 .mandy-shell {
-  width: min(980px, 100%);
+  width: min(1180px, 100%);
   margin: 0 auto;
 }
 
@@ -71,7 +71,7 @@ button {
 .mandy-brand h1 {
   margin: 0;
   color: var(--mandy-purple-dark);
-  font-size: clamp(44px, 7vw, 66px);
+  font-size: clamp(44px, 6vw, 64px);
   line-height: 0.98;
   letter-spacing: -0.04em;
 }
@@ -81,19 +81,30 @@ button {
   color: #918ba8;
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+.mandy-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 24px;
+  align-items: stretch;
 }
 
 .mandy-info {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 18px;
-  padding: 26px 30px;
-  margin-bottom: 22px;
+  padding: 28px 28px;
   border: 1px solid #e8e2f8;
   border-radius: 22px;
   background: linear-gradient(135deg, #f8f6ff, #f0ecff);
+  min-height: 100%;
+}
+
+.mandy-chat-column {
+  min-width: 0;
 }
 
 .mandy-info-icon {
@@ -108,17 +119,17 @@ button {
 }
 
 .mandy-info h2 {
-  margin: 1px 0 6px;
+  margin: 1px 0 10px;
   color: var(--mandy-purple-dark);
   font-size: 18px;
   line-height: 1.35;
 }
 
 .mandy-info p {
-  margin: 7px 0;
+  margin: 10px 0;
   color: #5b5671;
   font-size: 14px;
-  line-height: 1.55;
+  line-height: 1.58;
 }
 
 .mandy-chat-card {
@@ -127,6 +138,10 @@ button {
   border-radius: 24px;
   background: #ffffff;
   box-shadow: 0 22px 55px rgba(40, 29, 88, 0.08);
+  height: 100%;
+  min-height: 610px;
+  display: flex;
+  flex-direction: column;
 }
 
 .mandy-chat-head {
@@ -229,8 +244,9 @@ button {
 }
 
 .mandy-messages {
+  flex: 1;
+  min-height: 220px;
   max-height: 430px;
-  min-height: 190px;
   overflow-y: auto;
   padding: 18px 22px;
   display: flex;
@@ -380,9 +396,13 @@ button {
   text-align: center;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
   .mandy-page {
-    padding: 24px 12px 32px;
+    padding: 22px 12px 30px;
+  }
+
+  .mandy-brand {
+    margin-bottom: 20px;
   }
 
   .mandy-mark {
@@ -391,14 +411,31 @@ button {
     border-radius: 16px;
   }
 
-  .mandy-brand {
-    margin-bottom: 22px;
+  .mandy-brand h1 {
+    font-size: 46px;
+  }
+
+  .mandy-brand p {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+  }
+
+  .mandy-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .mandy-chat-column {
+    order: 1;
   }
 
   .mandy-info {
+    order: 2;
     grid-template-columns: 1fr;
     padding: 20px;
     border-radius: 18px;
+    min-height: 0;
   }
 
   .mandy-info-icon {
@@ -416,6 +453,7 @@ button {
 
   .mandy-chat-card {
     border-radius: 20px;
+    min-height: 0;
   }
 
   .mandy-suggestions {
@@ -423,7 +461,8 @@ button {
   }
 
   .mandy-messages {
-    max-height: 48vh;
+    min-height: 180px;
+    max-height: 46vh;
     padding: 16px;
   }
 
