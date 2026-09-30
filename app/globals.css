@@ -335,6 +335,36 @@ button {
   }
 }
 
+.mandy-style-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 22px 10px;
+}
+
+.mandy-style-action {
+  border: 1px solid #d9d0ef;
+  border-radius: 999px;
+  background: #f9f7ff;
+  color: #5f47b6;
+  padding: 7px 11px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.mandy-style-action:hover:not(:disabled) {
+  background: #f0ebff;
+  border-color: #bcaee8;
+  transform: translateY(-1px);
+}
+
+.mandy-style-action:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
 .mandy-input-row {
   margin: 0 22px;
   padding: 7px 7px 7px 15px;
@@ -470,6 +500,11 @@ button {
   .mandy-chat-head {
     padding-left: 16px;
     padding-right: 16px;
+  }
+
+  .mandy-style-actions {
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
   }
 
   .mandy-input-row {
