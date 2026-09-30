@@ -11,10 +11,29 @@ const WELCOME_MESSAGE = {
   ts: null,
 };
 
-const SUGGESTIONS = [
-  "What are your hours?",
-  "How much for a clogged drain?",
-  "Do you handle emergencies?",
+const MANDATE_RESPONSE = `Bene! È la scelta economicamente più conveniente.
+
+Per procedere:
+
+1. Firma il mandato e la scheda che hai ricevuto per e-mail e inviaceli per PEC a homyhostsrl@legalmail.it
+
+2. Segui questo link e prenota una chiamata per aggiungere il numero di telefono di Homy Host al tuo account (se vuoi trasferire l’account e mantenere lo storico)
+
+Finito! Al resto penseremo noi e a partire dal 1 gennaio pagherai la ritenuta solo sul netto.`;
+
+const CHOICE_CARDS = [
+  {
+    title: "Resto con il modello attuale",
+    text:
+      "Non devi fare nulla per cambiare modello. Continui con la configurazione attuale; dal 13 ottobre, però, Airbnb applicherà la propria commissione interamente al proprietario.",
+    action: "Voglio mantenere il modello attuale",
+  },
+  {
+    title: "Voglio passare al mandato",
+    text:
+      "Homy Host gestirà la locazione per tuo conto, separando il canone dai servizi. È la nuova configurazione pensata per ridurre l’impatto economico delle modifiche di Airbnb.",
+    action: "Voglio passare al mandato",
+  },
 ];
 
 function timeNow() {
@@ -70,6 +89,17 @@ export default function ChatWidget({ apiUrl = "/api/chat", brandName = "AquaFix 
   async function sendMessage(text) {
     const content = text.trim();
     if (!content || loading) return;
+
+    if (content === "Voglio passare al mandato") {
+      const now = timeNow();
+      setMessages((prev) => [
+        ...prev,
+        { role: "user", content, ts: now },
+        { role: "assistant", content: MANDATE_RESPONSE, ts: now },
+      ]);
+      setInput("");
+      return;
+    }
 
     const nextMessages = [...messages, { role: "user", content, ts: timeNow() }];
     setMessages(nextMessages);
@@ -167,16 +197,26 @@ export default function ChatWidget({ apiUrl = "/api/chat", brandName = "AquaFix 
           </div>
 
           {messages.length <= 1 && (
-            <div style={styles.suggestions}>
-              {SUGGESTIONS.map((s) => (
-                <button
-                  key={s}
-                  className="aiw-suggestion-chip"
-                  style={styles.suggestionChip}
-                  onClick={() => sendMessage(s)}
-                >
-                  {s}
-                </button>
+            <div style={styles.choices}>
+              <div style={styles.choicesIntro}>
+                <strong>Le due possibilità</strong>
+                <span>Scegli quella che vuoi approfondire.</span>
+              </div>
+
+              {CHOICE_CARDS.map((choice) => (
+                <div key={choice.action} style={styles.choiceCard}>
+                  <div style={styles.choiceCopy}>
+                    <div style={styles.choiceTitle}>{choice.title}</div>
+                    <div style={styles.choiceText}>{choice.text}</div>
+                  </div>
+                  <button
+                    className="aiw-suggestion-chip"
+                    style={styles.choiceButton}
+                    onClick={() => sendMessage(choice.action)}
+                  >
+                    {choice.title}
+                  </button>
+                </div>
               ))}
             </div>
           )}
@@ -334,17 +374,51 @@ const styles = {
   },
   typingBubble: { display: "flex", gap: 4, alignItems: "center", padding: "12px 14px" },
   timestamp: { fontSize: 10, color: "#9aa9b1", marginTop: 3, padding: "0 2px" },
-  suggestions: {
+  choices: {
     display: "flex",
-    flexWrap: "wrap",
-    gap: 6,
+    flexDirection: "column",
+    gap: 8,
     padding: "0 12px 10px",
     background: "#f5f8fa",
   },
-  suggestionChip: {
+  choicesIntro: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 2,
+    padding: "2px 2px 4px",
     fontSize: 12,
-    padding: "6px 10px",
-    borderRadius: 999,
+    color: "#52636d",
+  },
+  choiceCard: {
+    display: "flex",
+    alignItems: "center",
+    gap: 10,
+    padding: "10px 11px",
+    border: "1px solid #dbe5ea",
+    borderRadius: 12,
+    background: "#fff",
+  },
+  choiceCopy: {
+    flex: 1,
+    minWidth: 0,
+  },
+  choiceTitle: {
+    fontSize: 12.5,
+    fontWeight: 700,
+    color: "#1a2733",
+    marginBottom: 3,
+  },
+  choiceText: {
+    fontSize: 11.5,
+    lineHeight: 1.4,
+    color: "#5b6b75",
+  },
+  choiceButton: {
+    flexShrink: 0,
+    fontSize: 11.5,
+    fontWeight: 600,
+    padding: "7px 9px",
+    borderRadius: 9,
     border: "1px solid #cfe0e8",
     background: "#fff",
     color: "#0b6e99",
