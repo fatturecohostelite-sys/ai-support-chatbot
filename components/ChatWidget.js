@@ -123,6 +123,7 @@ export default function ChatWidget({ apiUrl = "/api/chat" }) {
     const nextMessages = [...messages, { role: "user", content, ts: timeNow() }];
     setMessages(nextMessages);
     setInput("");
+    inputRef.current?.blur();
     setLoading(true);
 
     try {
@@ -151,7 +152,6 @@ export default function ChatWidget({ apiUrl = "/api/chat" }) {
       ]);
     } finally {
       setLoading(false);
-      requestAnimationFrame(() => inputRef.current?.focus());
     }
   }
 
@@ -236,12 +236,20 @@ export default function ChatWidget({ apiUrl = "/api/chat" }) {
           sendMessage(input);
         }}
       >
-        <input
+        <textarea
           ref={inputRef}
           value={input}
+          rows={1}
           onChange={(event) => setInput(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === "Enter" && !event.shiftKey) {
+              event.preventDefault();
+              sendMessage(input);
+            }
+          }}
           placeholder="Scrivi qui la tua domanda..."
           aria-label="Scrivi una domanda a Mandy"
+          enterKeyHint="send"
         />
         <button type="submit" disabled={loading || !input.trim()} aria-label="Invia">
           ↑
