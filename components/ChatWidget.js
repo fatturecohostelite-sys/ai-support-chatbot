@@ -19,15 +19,17 @@ const SUGGESTIONS = [
   "Cosa succede al mio account Airbnb?",
 ];
 
-const MANDATE_RESPONSE = `Ottima scelta!
+const MANDATE_RESPONSE = `**Ottima scelta!**
 
 Per procedere:
 
-1. Firma il mandato e la scheda che hai ricevuto per e-mail e inviaceli tramite PEC a homyhostsrl@legalmail.it
+**1. Firma il mandato e la scheda** che hai ricevuto per e-mail e inviaceli tramite PEC a **homyhostsrl@legalmail.it**
 
-2. Se vuoi trasferire il tuo account Airbnb e mantenere storico e recensioni, segui il link e prenota una chiamata per aggiungere il numero di telefono di Homy Host al tuo account.
+**2. Se vuoi trasferire il tuo account Airbnb** e mantenere storico e recensioni, segui il link e prenota una chiamata per aggiungere il numero di telefono di Homy Host al tuo account.
 
-Finito! Al resto pensiamo noi. La ritenuta verrà applicata sul canone lordo di tua spettanza; i servizi Homy Host sono separati dal tuo canone.`;
+**Finito!** Al resto pensiamo noi.
+
+La ritenuta verrà applicata sul **canone lordo di tua spettanza**; i **servizi Homy Host sono separati dal tuo canone**.`;
 
 const STYLE_ACTIONS = [
   {
