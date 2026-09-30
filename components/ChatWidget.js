@@ -21,8 +21,8 @@ const SUGGESTIONS = [
 
 const STYLE_ACTIONS = [
   {
-    label: "Spiegalo alla romana",
-    prompt: "Spiegalo alla romana.",
+    label: "Spiegalo super semplice",
+    prompt: "Spiegalo super semplice.",
   },
   {
     label: "Spiegazione analitica",
