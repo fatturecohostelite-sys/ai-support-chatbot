@@ -209,7 +209,7 @@ export default function ChatWidget({ apiUrl = "/api/chat", brandName = "AquaFix 
             )}
           </div>
 
-          {messages.length <= 1 && (
+          {messages.length <= 3 && (
             <div style={styles.choices}>
               <div style={styles.choicesIntro}>
                 <strong>Le due possibilità</strong>
