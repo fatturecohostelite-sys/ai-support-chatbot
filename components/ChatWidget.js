@@ -132,6 +132,25 @@ export default function ChatWidget({ apiUrl = "/api/chat" }) {
     }
   }, [messages, loading]);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const focusDesktopInput = () => {
+      if (window.matchMedia("(min-width: 801px)").matches) {
+        inputRef.current?.focus();
+      }
+    };
+
+    // Keep the desktop composer active as soon as the widget is ready.
+    focusDesktopInput();
+
+    // Re-focus after each rendered response. Mobile is deliberately excluded
+    // so the on-screen keyboard is never opened automatically.
+    const frame = window.requestAnimationFrame(focusDesktopInput);
+    return () => window.cancelAnimationFrame(frame);
+  }, [messages, loading]);
+
+
   async function sendMessage(text) {
     const content = text.trim();
     if (!content || loading) return;
@@ -150,9 +169,11 @@ export default function ChatWidget({ apiUrl = "/api/chat" }) {
     const nextMessages = [...messages, { role: "user", content, ts: timeNow() }];
     setMessages(nextMessages);
     setInput("");
-    inputRef.current?.blur();
 
+    // On desktop the composer stays focused. On mobile, blur and scroll
+    // to the composer so the keyboard behavior remains unchanged.
     if (typeof window !== "undefined" && window.matchMedia("(max-width: 800px)").matches) {
+      inputRef.current?.blur();
       window.setTimeout(() => {
         composerRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
       }, 320);
