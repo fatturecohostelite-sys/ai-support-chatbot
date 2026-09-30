@@ -27,7 +27,7 @@ Per procedere:
 
 2. Segui questo link e prenota una chiamata per aggiungere il numero di telefono di Homy Host al tuo account (se vuoi trasferire l’account e mantenere lo storico)
 
-Finito! Al resto penseremo noi e a partire dal 1 gennaio pagherai la ritenuta solo sul netto.`;
+Finito! Al resto penseremo noi e a partire dal 1 gennaio pagherai la ritenuta solo sulla tua parte.`;
 
 const STYLE_ACTIONS = [
   {
