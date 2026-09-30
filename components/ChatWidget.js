@@ -19,6 +19,16 @@ const SUGGESTIONS = [
   "Cosa succede al mio account Airbnb?",
 ];
 
+const MANDATE_RESPONSE = `Bene! È la scelta economicamente più conveniente.
+
+Per procedere:
+
+1. Firma il mandato e la scheda che hai ricevuto per e-mail e inviaceli per PEC a homyhostsrl@legalmail.it
+
+2. Segui questo link e prenota una chiamata per aggiungere il numero di telefono di Homy Host al tuo account (se vuoi trasferire l’account e mantenere lo storico)
+
+Finito! Al resto penseremo noi e a partire dal 1 gennaio pagherai la ritenuta solo sul netto.`;
+
 const STYLE_ACTIONS = [
   {
     label: "Spiegalo super semplice",
@@ -28,6 +38,11 @@ const STYLE_ACTIONS = [
     label: "Spiegazione analitica",
     prompt:
       "Dammi una spiegazione analitica della tua ultima risposta: tecnica, precisa e strutturata, ma non più lunga del necessario.",
+  },
+  {
+    label: "Voglio passare al mandato",
+    prompt: "Voglio passare al mandato",
+    direct: true,
   },
 ];
 
@@ -120,6 +135,17 @@ export default function ChatWidget({ apiUrl = "/api/chat" }) {
   async function sendMessage(text) {
     const content = text.trim();
     if (!content || loading) return;
+
+    if (content === "Voglio passare al mandato") {
+      const now = timeNow();
+      setMessages((prev) => [
+        ...prev,
+        { role: "user", content, ts: now },
+        { role: "assistant", content: MANDATE_RESPONSE, ts: now },
+      ]);
+      setInput("");
+      return;
+    }
 
     const nextMessages = [...messages, { role: "user", content, ts: timeNow() }];
     setMessages(nextMessages);
