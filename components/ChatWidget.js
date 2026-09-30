@@ -93,6 +93,7 @@ export default function ChatWidget({ apiUrl = "/api/chat" }) {
   const [loading, setLoading] = useState(false);
   const scrollRef = useRef(null);
   const inputRef = useRef(null);
+  const composerRef = useRef(null);
 
   useEffect(() => {
     try {
@@ -124,6 +125,13 @@ export default function ChatWidget({ apiUrl = "/api/chat" }) {
     setMessages(nextMessages);
     setInput("");
     inputRef.current?.blur();
+
+    if (typeof window !== "undefined" && window.matchMedia("(max-width: 800px)").matches) {
+      window.setTimeout(() => {
+        composerRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+      }, 320);
+    }
+
     setLoading(true);
 
     try {
@@ -230,6 +238,7 @@ export default function ChatWidget({ apiUrl = "/api/chat" }) {
       )}
 
       <form
+        ref={composerRef}
         className="mandy-input-row"
         onSubmit={(event) => {
           event.preventDefault();
