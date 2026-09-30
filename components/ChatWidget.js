@@ -23,6 +23,58 @@ function timeNow() {
   return new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
 }
 
+function renderInlineMarkdown(text) {
+  return text.split(/(\*\*[^*]+\*\*)/g).map((part, index) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return <strong key={index}>{part.slice(2, -2)}</strong>;
+    }
+    return part;
+  });
+}
+
+function renderMessageContent(text) {
+  const lines = text.split("\n");
+  const blocks = [];
+  let bulletItems = [];
+
+  function flushBullets() {
+    if (!bulletItems.length) return;
+    blocks.push(
+      <ul className="mandy-message-list" key={`list-${blocks.length}`}>
+        {bulletItems.map((item, index) => (
+          <li key={index}>{renderInlineMarkdown(item)}</li>
+        ))}
+      </ul>
+    );
+    bulletItems = [];
+  }
+
+  lines.forEach((line, index) => {
+    const trimmed = line.trim();
+
+    if (trimmed.startsWith("- ")) {
+      bulletItems.push(trimmed.slice(2));
+      return;
+    }
+
+    flushBullets();
+
+    if (!trimmed) {
+      blocks.push(<div className="mandy-message-spacer" key={`space-${index}`} />);
+      return;
+    }
+
+    blocks.push(
+      <div className="mandy-message-line" key={`line-${index}`}>
+        {renderInlineMarkdown(line)}
+      </div>
+    );
+  });
+
+  flushBullets();
+  return blocks;
+}
+
 export default function ChatWidget({ apiUrl = "/api/chat" }) {
   const [messages, setMessages] = useState([WELCOME_MESSAGE]);
   const [input, setInput] = useState("");
@@ -131,7 +183,7 @@ export default function ChatWidget({ apiUrl = "/api/chat" }) {
           >
             {message.role === "assistant" && <div className="mandy-message-avatar">M</div>}
             <div className="mandy-message-col">
-              <div className="mandy-bubble">{message.content}</div>
+              <div className="mandy-bubble">{renderMessageContent(message.content)}</div>
               {message.ts && <div className="mandy-time">{message.ts}</div>}
             </div>
           </div>
