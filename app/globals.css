@@ -473,8 +473,18 @@ button {
   }
 
   .mandy-input-row {
-    margin-left: 12px;
-    margin-right: 12px;
+    margin-left: max(12px, env(safe-area-inset-left));
+    margin-right: max(12px, env(safe-area-inset-right));
+  }
+
+  .mandy-input-row input {
+    font-size: 16px;
+  }
+
+  .mandy-input-row button {
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
   }
 
   .mandy-privacy {
