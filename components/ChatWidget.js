@@ -74,9 +74,22 @@ export default function ChatWidget({ apiUrl = "/api/chat", brandName = "AquaFix 
   useEffect(() => {
     if (open) {
       setHasUnread(false);
-      inputRef.current?.focus();
+
+      // Desktop: keep the text field focused so typing can start immediately.
+      // Mobile: do not force focus because it would open the on-screen keyboard.
+      const isDesktop = window.matchMedia("(min-width: 768px)").matches;
+      if (isDesktop) inputRef.current?.focus();
     }
   }, [open]);
+
+  useEffect(() => {
+    if (!open || loading) return;
+
+    // Keep the desktop input focused after each reply without forcing
+    // the mobile keyboard to open.
+    const isDesktop = window.matchMedia("(min-width: 768px)").matches;
+    if (isDesktop) inputRef.current?.focus();
+  }, [messages, loading, open]);
 
   useEffect(() => {
     function onKey(e) {
