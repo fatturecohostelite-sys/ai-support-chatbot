@@ -19,6 +19,19 @@ const SUGGESTIONS = [
   "Cosa succede al mio account Airbnb?",
 ];
 
+const STYLE_ACTIONS = [
+  {
+    label: "Spiegalo alla romana",
+    prompt:
+      "Riscrivi la tua ultima risposta spiegandola alla romana: semplice, concreta, diretta e comprensibile, senza perdere precisione.",
+  },
+  {
+    label: "Spiegazione analitica",
+    prompt:
+      "Riprendi la tua ultima risposta e dammene una spiegazione analitica: ordinata, dettagliata e precisa, con passaggi logici, numeri o esempi quando aiutano a capire.",
+  },
+];
+
 function timeNow() {
   return new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
 }
@@ -200,6 +213,22 @@ export default function ChatWidget({ apiUrl = "/api/chat" }) {
           </div>
         )}
       </div>
+
+      {messages.length > 1 && (
+        <div className="mandy-style-actions" aria-label="Modalità di spiegazione">
+          {STYLE_ACTIONS.map((action) => (
+            <button
+              key={action.label}
+              type="button"
+              className="mandy-style-action"
+              onClick={() => sendMessage(action.prompt)}
+              disabled={loading}
+            >
+              {action.label}
+            </button>
+          ))}
+        </div>
+      )}
 
       <form
         className="mandy-input-row"
