@@ -7,7 +7,7 @@ const STORAGE_KEY = "mandy-chat-history";
 const WELCOME_MESSAGE = {
   role: "assistant",
   content:
-    "Ciao! Sono Mandy, l’assistente AI di Homy Host per i proprietari. Posso aiutarti a capire il nuovo mandato e confrontarlo con il modello attuale. Da dove vuoi iniziare?",
+    "Ciao! Sono Mandy, l’esperta AI sul mandato di Homy Host. Posso aiutarti a capire il nuovo mandato e confrontarlo con il modello attuale. Da dove vuoi iniziare?",
   ts: null,
 };
 
@@ -99,7 +99,7 @@ export default function ChatWidget({ apiUrl = "/api/chat" }) {
           <div className="mandy-chat-name">Mandy</div>
           <div className="mandy-chat-status">
             <span className="mandy-online-dot" />
-            Assistente AI Homy Host
+            Esperta AI sul mandato
           </div>
         </div>
       </div>
