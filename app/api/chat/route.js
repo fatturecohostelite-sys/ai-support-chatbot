@@ -126,7 +126,7 @@ async function callOpenAI(messages) {
     },
     body: JSON.stringify({
       model: process.env.OPENAI_MODEL || "gpt-4o-mini",
-      max_tokens: 400,
+      max_completion_tokens: 400,
       messages: [
         { role: "system", content: buildSystemPrompt() },
         ...messages.map((m) => ({ role: m.role, content: m.content })),
