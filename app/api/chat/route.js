@@ -126,7 +126,7 @@ async function callOpenAI(messages) {
     },
     body: JSON.stringify({
       model: process.env.OPENAI_MODEL || "gpt-4o-mini",
-      max_completion_tokens: 400,
+      max_completion_tokens: 4400,
       messages: [
         { role: "system", content: buildSystemPrompt() },
         ...messages.map((m) => ({ role: m.role, content: m.content })),
@@ -141,6 +141,6 @@ async function callOpenAI(messages) {
   const data = await res.json();
   return (
     data.choices?.[0]?.message?.content?.trim() ||
-    "Sorry, I couldn't generate a response."
+    "Scusa, il mio cervello IA ha avuto un bug, puoi rifarmi la domanda?"
   );
 }
