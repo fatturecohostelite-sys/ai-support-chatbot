@@ -22,13 +22,12 @@ const SUGGESTIONS = [
 const STYLE_ACTIONS = [
   {
     label: "Spiegalo alla romana",
-    prompt:
-      "Riscrivi la tua ultima risposta spiegandola alla romana: semplice, concreta, diretta e comprensibile, senza perdere precisione.",
+    prompt: "Spiegalo alla romana.",
   },
   {
     label: "Spiegazione analitica",
     prompt:
-      "Riprendi la tua ultima risposta e dammene una spiegazione analitica: ordinata, dettagliata e precisa, con passaggi logici, numeri o esempi quando aiutano a capire.",
+      "Dammi una spiegazione analitica della tua ultima risposta: tecnica, precisa e strutturata, ma non più lunga del necessario.",
   },
 ];
 
