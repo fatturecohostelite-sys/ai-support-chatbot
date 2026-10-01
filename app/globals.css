@@ -514,6 +514,35 @@ button {
     padding: 16px;
   }
 
+  .mandy-chat-card.has-conversation {
+    min-height: calc(100dvh - 20px);
+  }
+
+  .mandy-chat-card.has-conversation .mandy-chat-head {
+    flex: 0 0 auto;
+  }
+
+  .mandy-chat-card.has-conversation .mandy-messages {
+    min-height: 0;
+    max-height: none;
+    height: auto;
+    flex: 1 1 auto;
+    padding-bottom: 18px;
+  }
+
+  .mandy-chat-card.has-conversation .mandy-style-actions {
+    flex: 0 0 auto;
+  }
+
+  .mandy-chat-card.has-conversation .mandy-input-row {
+    flex: 0 0 auto;
+  }
+
+  .mandy-chat-card.has-conversation .mandy-privacy {
+    flex: 0 0 auto;
+    margin-bottom: max(10px, env(safe-area-inset-bottom));
+  }
+
   .mandy-suggestions-wrap,
   .mandy-chat-head {
     padding-left: 16px;
@@ -528,6 +557,7 @@ button {
   .mandy-input-row {
     margin-left: max(12px, env(safe-area-inset-left));
     margin-right: max(12px, env(safe-area-inset-right));
+    scroll-margin-bottom: calc(12px + env(safe-area-inset-bottom));
   }
 
   .mandy-input-row textarea {
