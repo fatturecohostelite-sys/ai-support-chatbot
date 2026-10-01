@@ -277,6 +277,49 @@ button {
   white-space: pre-wrap;
 }
 
+.mandy-message-heading {
+  margin: 8px 0 4px;
+  font-weight: 800;
+  line-height: 1.35;
+  color: inherit;
+}
+
+.mandy-message-heading:first-child {
+  margin-top: 0;
+}
+
+.mandy-table-wrap {
+  width: 100%;
+  margin: 8px 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mandy-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.94em;
+  line-height: 1.42;
+}
+
+.mandy-table th,
+.mandy-table td {
+  padding: 8px 9px;
+  border: 1px solid #ded8ea;
+  text-align: left;
+  vertical-align: top;
+}
+
+.mandy-table th {
+  background: #eee9fa;
+  color: #35285f;
+  font-weight: 800;
+}
+
+.mandy-table td {
+  background: rgba(255, 255, 255, 0.45);
+}
+
 .is-assistant .mandy-bubble {
   color: #302b42;
   background: #f6f4f9;
