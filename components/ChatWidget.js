@@ -276,7 +276,7 @@ export default function ChatWidget({ apiUrl = "/api/chat" }) {
             <button
               key={action.label}
               type="button"
-              className="mandy-style-action"
+              className={`mandy-style-action ${action.direct ? "mandy-style-action-direct" : ""}`}
               onClick={() => sendMessage(action.prompt)}
               disabled={loading}
             >
