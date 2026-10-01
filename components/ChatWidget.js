@@ -13,7 +13,7 @@ const WELCOME_MESSAGE = {
 
 const SUGGESTIONS = [
   "Perché conviene il mandato?",
-  "Cosa cambia rispetto a oggi?",
+  "Cosa cambia se scelgo il mandato?",
   "Perché la ritenuta scende con il mandato?",
   "Confronto secco modello attuale/Mandato",
   "Cosa succede al mio account Airbnb?",
