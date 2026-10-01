@@ -65,6 +65,7 @@ function renderMessageContent(text) {
   const lines = text.split("\n");
   const blocks = [];
   let bulletItems = [];
+  let tableRows = [];
 
   function flushBullets() {
     if (!bulletItems.length) return;
@@ -78,8 +79,65 @@ function renderMessageContent(text) {
     bulletItems = [];
   }
 
+  function splitTableRow(line) {
+    return line
+      .trim()
+      .replace(/^\|/, "")
+      .replace(/\|$/, "")
+      .split("|")
+      .map((cell) => cell.trim());
+  }
+
+  function flushTable() {
+    if (!tableRows.length) return;
+
+    const rows = tableRows.map(splitTableRow);
+    const hasSeparator =
+      rows.length > 1 &&
+      rows[1].every((cell) => /^:?-{3,}:?$/.test(cell));
+
+    const header = hasSeparator ? rows[0] : null;
+    const body = hasSeparator ? rows.slice(2) : rows;
+
+    blocks.push(
+      <div className="mandy-table-wrap" key={`table-${blocks.length}`}>
+        <table className="mandy-table">
+          {header && (
+            <thead>
+              <tr>
+                {header.map((cell, index) => (
+                  <th key={index}>{renderInlineMarkdown(cell)}</th>
+                ))}
+              </tr>
+            </thead>
+          )}
+          <tbody>
+            {body.map((row, rowIndex) => (
+              <tr key={rowIndex}>
+                {row.map((cell, cellIndex) => (
+                  <td key={cellIndex}>{renderInlineMarkdown(cell)}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+
+    tableRows = [];
+  }
+
   lines.forEach((line, index) => {
     const trimmed = line.trim();
+    const isTableLine = trimmed.startsWith("|") && trimmed.endsWith("|");
+
+    if (isTableLine) {
+      flushBullets();
+      tableRows.push(trimmed);
+      return;
+    }
+
+    flushTable();
 
     if (trimmed.startsWith("- ")) {
       bulletItems.push(trimmed.slice(2));
@@ -93,6 +151,16 @@ function renderMessageContent(text) {
       return;
     }
 
+    const headingMatch = trimmed.match(/^(#{1,4})\s+(.+)$/);
+    if (headingMatch) {
+      blocks.push(
+        <div className="mandy-message-heading" key={`heading-${index}`}>
+          {renderInlineMarkdown(headingMatch[2])}
+        </div>
+      );
+      return;
+    }
+
     blocks.push(
       <div className="mandy-message-line" key={`line-${index}`}>
         {renderInlineMarkdown(line)}
@@ -101,6 +169,7 @@ function renderMessageContent(text) {
   });
 
   flushBullets();
+  flushTable();
   return blocks;
 }
 
