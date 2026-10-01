@@ -15,7 +15,7 @@ const SUGGESTIONS = [
   "Perché conviene il mandato?",
   "Cosa cambia rispetto a oggi?",
   "Perché la ritenuta scende con il mandato?",
-  "Quali responsabilità restano a me?",
+  "Confronto secco modello attuale/Mandato",
   "Cosa succede al mio account Airbnb?",
 ];
 
