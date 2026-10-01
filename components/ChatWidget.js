@@ -14,7 +14,7 @@ const WELCOME_MESSAGE = {
 const SUGGESTIONS = [
   "Perché conviene il mandato?",
   "Cosa cambia rispetto a oggi?",
-  "Come funziona la ritenuta del 21%?",
+  "Perché la ritenuta scende con il mandato?",
   "Quali responsabilità restano a me?",
   "Cosa succede al mio account Airbnb?",
 ];
@@ -152,6 +152,27 @@ export default function ChatWidget({ apiUrl = "/api/chat" }) {
     return () => window.cancelAnimationFrame(frame);
   }, [messages, loading]);
 
+  useEffect(() => {
+    if (typeof window === "undefined" || loading) return;
+    if (!window.matchMedia("(max-width: 800px)").matches) return;
+    if (messages.length <= 1) return;
+
+    const lastMessage = messages[messages.length - 1];
+    if (lastMessage?.role !== "assistant") return;
+
+    const timer = window.setTimeout(() => {
+      composerRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+      });
+
+      if (scrollRef.current) {
+        scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+      }
+    }, 140);
+
+    return () => window.clearTimeout(timer);
+  }, [messages, loading]);
 
   async function sendMessage(text) {
     const content = text.trim();
@@ -213,7 +234,10 @@ export default function ChatWidget({ apiUrl = "/api/chat" }) {
   }
 
   return (
-    <section className="mandy-chat-card" aria-label="Chat con Mandy">
+    <section
+      className={`mandy-chat-card ${messages.length > 1 ? "has-conversation" : ""}`}
+      aria-label="Chat con Mandy"
+    >
       <div className="mandy-chat-head">
         <div className="mandy-chat-avatar">M</div>
         <div>
