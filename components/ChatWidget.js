@@ -16,7 +16,7 @@ const SUGGESTIONS = [
   "Cosa cambia se scelgo il mandato?",
   "Perché la ritenuta scende con il mandato?",
   "Confronto secco modello attuale/Mandato",
-  "Cosa succede al mio account Airbnb?",
+  "Devo cambiare account Airbnb?",
 ];
 
 const MANDATE_RESPONSE = `**Ottima scelta!**
